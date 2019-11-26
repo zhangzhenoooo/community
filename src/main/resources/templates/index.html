@@ -3,9 +3,13 @@
 <head>
     <title>Community</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
-    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/community.css">
+    <link rel="icon" href="/images/logo.png" type="image/x-icon"/>
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <script src="/js/community.js" type="application/javascript"></script>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -35,18 +39,23 @@
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">下载</a></li>
-                <li><a th:href="@{https://github.com/login/oauth/authorize(client_id='4dace63cd03686b4f799',redirect_uri=${#httpServletRequest.getServletContext().getAttribute('redirectUri')},scope='user',state=1)}">登录</a></li>
-                <!--<li class="dropdown">-->
-                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">登录<span class="caret"></span></a>-->
-                    <!--<ul class="dropdown-menu">-->
-                        <!--<li><a href="#">Action</a></li>-->
-                        <!--<li><a href="#">Another action</a></li>-->
-                        <!--<li><a href="#">Something else here</a></li>-->
-                        <!--<li role="separator" class="divider"></li>-->
-                        <!--<li><a href="#">Separated link</a></li>-->
-                    <!--</ul>-->
-                <!--</li>-->
+                <li th:if="${session.user == null}">
+                    <a  href="https://github.com/login/oauth/authorize?client_id=4dace63cd03686b4f799&redirect_uri=http://localhost:8888/callback&scope=user&state=1">登录</a>
+                </li>
+
+
+                <li th:if="${session.user != null}" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >
+                        <span  th:text="${session.user.getName()}"class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
+                </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

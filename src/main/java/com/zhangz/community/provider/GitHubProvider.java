@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 @Component
 public class GitHubProvider {
-    public  String getAccessToker(AccessTokerDTO accessTokerDTO){
+    public  String getAccessToken(AccessTokerDTO accessTokerDTO){
    MediaType mediaType
             = MediaType.get("application/json; charset=utf-8");
 
@@ -30,17 +30,19 @@ public class GitHubProvider {
         try (Response response = client.newCall(request).execute()) {
             String string= response.body().string();
             System.out.println(string);
-            return response.body().string();
-        } catch (IOException e) {
+            String token = string.split("&")[0].split("=")[1];
+            System.out.println(token);
+            return token;
+        } catch (Exception e) {
             e.printStackTrace();
         }
     return  null;
   }
 
-  public GitHubUser getUser(String accessToker){
+  public GitHubUser getUser(String accessToken){
         OkHttpClient client = new OkHttpClient();
       Request request = new Request.Builder()
-              .url("https://api.github.com/user%EF%BC%9Faccess_toker"+accessToker)
+              .url("https://api.github.com/user?access_token"+accessToken)
               .build();
       try {
           Response response = client.newCall(request).execute();
