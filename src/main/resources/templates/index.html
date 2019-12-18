@@ -10,6 +10,7 @@
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script src="/js/bootstrap.min.js" type="application/javascript"></script>
     <script src="/js/community.js" type="application/javascript"></script>
+
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -45,7 +46,7 @@
                 </li>
 
                 <li th:if="${session.user != null}" class="dropdown">
-                    <a href="#">发起问题</a>
+                    <a href="/publish">发起问题</a>
                 </li>
                 <li th:if="${session.user != null}" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -59,48 +60,14 @@
                         <li><a href="#">退出登录</a></li>
                     </ul>
                 </li>
+                <li th:if="${session.user != null}" class="dropdown">
+                    <img th:src="${session.user.getAvatarUrl()}" height="30px" weight="30px">
+                </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg9 col-md-9 col-sm-12 col-xs-12" aria-hidden="true">
-            <form action="">
-                <div class="form-group">
-                    <label><h3><span class="glyphicon glyphicon-plus"></span>发起</h3></label>
-                    <hr>
-                </div>
-                <div class="form-group">
-                    <label for="title">问题标题（简单扼要）：</label>
-                    <div class="row">
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" id="title" placeholder="请输入标题">
-                        </div>
-                        <div class="col-md-3">
-                            <div class="dropdown">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    选择类型
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <li><a href="#">默认类型</a></li>
-                                    <li><a href="#">技术类</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            <h2><span aria-hidden="true"></span></h2>
 
-        </div>
-        <div class="col-lg3 col-md-3 col-sm-12 col-xs-12" aria-hidden="true">
-            <h2>123</h2>
-        </div>
-    </div>
-
-</div>
 
 </body>
 </html>

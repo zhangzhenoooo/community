@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import lombok.Data;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -55,11 +56,14 @@ public class AuthorizeController {
             user.setAccountId(String.valueOf(gitHubUser.getId()));
             user.setAvatarUrl(null);
             user.setBio(gitHubUser.getBio());
+            user.setAvatarUrl(gitHubUser.getAvatar_url());
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
             user.setName(gitHubUser.getName());
-            user.setToken(UUID.randomUUID().toString());
             String token =  UUID.randomUUID().toString();
+            user.setToken(token);
+            System.out.println("UUID Token"+token);
+
             userMapper.insert(user);
             response.addCookie(new Cookie("token",token));
             //登录成功
