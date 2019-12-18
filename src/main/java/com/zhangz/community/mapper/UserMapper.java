@@ -22,4 +22,7 @@ public interface UserMapper {
 
     @Select("SELECT `user`.id,`user`.account_id,`user`.`name`,`user`.token,`user`.gmt_create,`user`.gmt_modified,`user`.bio,`user`.avatar_url  FROM `user` WHERE  token = #{token}")
     User findToken(@Param("token") String token); //当参数不是对象时，要用 @Param 来注释
+
+    @Select("SELECT `user`.id,`user`.account_id,`user`.`name`,`user`.token,`user`.gmt_create,`user`.gmt_modified,`user`.bio,`user`.avatar_url  FROM `user` WHERE  id = #{id}")
+    User findById(@Param("id") Integer id);
 }

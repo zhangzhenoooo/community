@@ -1,8 +1,10 @@
 package com.zhangz.community.controller;
 
 import com.mysql.cj.x.protobuf.MysqlxDatatypes;
+import com.zhangz.community.dto.QuestionDTO;
 import com.zhangz.community.mapper.UserMapper;
 import com.zhangz.community.model.User;
+import com.zhangz.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author zhangz
@@ -26,9 +29,12 @@ public class IndexController {
 //    }
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private QuestionService questionService;
 
     @GetMapping("/")
-    public String index(HttpServletRequest request) {
+    public String index(HttpServletRequest request,
+                        Model model) {
 
         Cookie[] cookies = request.getCookies();
         if (cookies != null && cookies.length != 0) {
@@ -44,6 +50,10 @@ public class IndexController {
             }
         }
 
-        return "index";
+        List<QuestionDTO> questionDTOList = questionService.list();
+        model.addAttribute("questionList",questionDTOList);
+
+
+        return "list_question";
     }
 }

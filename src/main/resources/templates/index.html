@@ -12,7 +12,7 @@
     <script src="/js/community.js" type="application/javascript"></script>
 
 </head>
-<body>
+<body style=" height: 40px">
 <nav class="navbar navbar-default">
     <div class="container-fluid ">
         <!-- 顶部导航栏 -->
@@ -61,7 +61,7 @@
                     </ul>
                 </li>
                 <li th:if="${session.user != null}" class="dropdown">
-                    <img th:src="${session.user.getAvatarUrl()}" height="30px" weight="30px">
+                    <img class="img-rounded" th:src="${session.user.getAvatarUrl()}" height="30px" weight="30px">
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
