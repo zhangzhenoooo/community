@@ -54,6 +54,6 @@ public class IndexController {
         model.addAttribute("questionList",questionDTOList);
 
 
-        return "list_question";
+        return "index";
     }
 }
