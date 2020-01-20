@@ -3,6 +3,7 @@ package com.zhangz.community.mapper;
 import com.zhangz.community.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -18,6 +19,9 @@ public interface QuestionMapper {
     public  void  create(Question question);
 
     @Select("select question.id,question.title,question.description,question.gmt_create,question.gmt_modified,question.creator,question.comment_count,\n" +
-        "question.view_count,question.like_count,question.tag from question")
-     public List<Question> list();
+        "question.view_count,question.like_count,question.tag from question limit #{offset},#{size}")
+     public List<Question> list(@Param(value = "offset") Integer offset,@Param(value = "size") Integer size);
+
+    @Select("select count(1) from question;")
+    public   Integer count();
 }

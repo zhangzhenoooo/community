@@ -64,15 +64,18 @@ public class PublicController {
             model.addAttribute("error", "用户未登录");
             return "publish";
         }
-        if(title==null|| title.equals("")||title == ""){
+        if(title==null|| title.equals("")){
             model.addAttribute("error", "标题不能为空");
             return "publish";
         }
-        if(description==null|| description.equals("")|| description == ""){
+        if(description==null|| description.equals("")){
             model.addAttribute("error", "请输入问题描述");
             return "publish";
         }
-
+        if(tag==null|| tag.equals("")){
+            model.addAttribute("error", "请输标签");
+            return "publish";
+        }
 
         Question question = new Question();
         question.setTitle(title);

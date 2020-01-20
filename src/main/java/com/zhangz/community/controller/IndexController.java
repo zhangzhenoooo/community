@@ -1,6 +1,7 @@
 package com.zhangz.community.controller;
 
 import com.mysql.cj.x.protobuf.MysqlxDatatypes;
+import com.zhangz.community.dto.PaginationDTo;
 import com.zhangz.community.dto.QuestionDTO;
 import com.zhangz.community.mapper.UserMapper;
 import com.zhangz.community.model.User;
@@ -34,7 +35,9 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(HttpServletRequest request,
-                        Model model) {
+                        Model model,
+                        @RequestParam(name = "page",defaultValue = "1") Integer page,
+                        @RequestParam(name = "size",defaultValue = "3") Integer size) {
 
         Cookie[] cookies = request.getCookies();
         if (cookies != null && cookies.length != 0) {
@@ -49,11 +52,9 @@ public class IndexController {
                 }
             }
         }
-
-        List<QuestionDTO> questionDTOList = questionService.list();
-        model.addAttribute("questionList",questionDTOList);
-
-
+        PaginationDTo pagination = questionService.list(page, size);
+     //   System.out.println("test =  " + pagination.getTotalPage());
+        model.addAttribute("pagination",pagination);
         return "index";
     }
 }
