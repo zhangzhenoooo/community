@@ -50,14 +50,12 @@
                     <a href="/publish">发起问题</a>
                 </li>
                 <li th:if="${session.user != null}" class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    <a href="#" id="self" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">
                         <span th:text="${session.user.getName()}"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">个人中心</a></li>
-                        <li><a href="#">收藏夹</a></li>
-                        <li><a href="#">切换账号</a></li>
+                        <li><a href="/profile/questions">我的问题</a></li>
                         <li><a href="#">退出登录</a></li>
                     </ul>
                 </li>
@@ -68,7 +66,9 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-
 </div>
+<script>
+
+</script>
 </body>
 </html>

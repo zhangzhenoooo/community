@@ -1,7 +1,7 @@
 body {
     /*background-image: url("/static/images/bg.jpg");*/
     /*background-size: 100%;*/
-    background-color: darkkhaki;
+    background-color: #efefef;
 }
 
 .main {
@@ -58,6 +58,9 @@ body {
 }
 
 .profile .section {
+    margin-top: 15px;
+}
+.section {
     margin-top: 15px;
 }
 

@@ -1,5 +1,6 @@
 package com.zhangz.community.mapper;
 
+import com.zhangz.community.dto.QuestionDTO;
 import com.zhangz.community.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -24,4 +25,15 @@ public interface QuestionMapper {
 
     @Select("select count(1) from question;")
     public   Integer count();
+
+    @Select("select question.id,question.title,question.description,question.gmt_create,question.gmt_modified,question.creator,question.comment_count,\n" +
+            "question.view_count,question.like_count,question.tag from question where creator = #{userId} limit #{offset},#{size}")
+    List<Question> listByUserId(@Param(value = "userId") Integer userId, @Param(value = "offset") Integer offset,@Param(value = "size") Integer size);
+
+    @Select("select count(1) from question where creator = #{userId};")
+    Integer countByUserId(@Param(value = "userId") Integer userId);
+
+    @Select("select question.id,question.title,question.description,question.gmt_create,question.gmt_modified,question.creator,question.comment_count,\n" +
+            "question.view_count,question.like_count,question.tag from question where id = #{id};")
+    Question getById(@Param(value =  "id") Integer id);
 }
