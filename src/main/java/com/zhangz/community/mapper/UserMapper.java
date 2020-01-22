@@ -1,10 +1,7 @@
 package com.zhangz.community.mapper;
 
 import com.zhangz.community.model.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -25,4 +22,10 @@ public interface UserMapper {
 
     @Select("SELECT `user`.id,`user`.account_id,`user`.`name`,`user`.token,`user`.gmt_create,`user`.gmt_modified,`user`.bio,`user`.avatar_url  FROM `user` WHERE  id = #{id}")
     User findById(@Param("id") Integer id);
+
+    @Select("SELECT `user`.id,`user`.account_id,`user`.`name`,`user`.token,`user`.gmt_create,`user`.gmt_modified,`user`.bio,`user`.avatar_url  FROM `user` WHERE  account_id = #{accountId}")
+    User findByAccountId(@Param(value = "accountId") String accountId);
+
+    @Update("UPDATE `user` SET gmt_modified=#{gmtModified},avatar_url = #{avatarUrl} ,`name` = #{name},token = #{token} WHERE account_id= #{accountId};")
+    void update(User user);
 }

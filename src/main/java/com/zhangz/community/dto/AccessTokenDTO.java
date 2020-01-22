@@ -8,7 +8,7 @@ import lombok.Data;
  * @date 2019/11/25 21:50
  */
 @Data
-public class AccessTokerDTO {
+public class AccessTokenDTO {
 
     private String client_id;
     private String client_secret;

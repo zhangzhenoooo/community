@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:o="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>发布问题</title>
@@ -23,6 +23,7 @@
     <div class="row">
         <div class="col-lg9 col-md-9 col-sm-12 col-xs-12" aria-hidden="true">
             <form action="/publish" method="post">
+                <input  type="hidden" id="id" name="id" th:value="${question.id}">
                 <div class="form-group">
                     <label><h3><span class="glyphicon glyphicon-plus "></span>发起</h3></label>
                     <hr>
@@ -31,7 +32,7 @@
                     <label for="title">问题标题（简单扼要）：</label>
                     <div class="row">
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="title" id="title" placeholder="请输入标题" th:value="${title}">
+                            <input type="text" class="form-control" name="title" id="title" placeholder="请输入标题" th:value="${question != null ? question.getTitle():''}">
                         </div>
                         <div class="col-md-2">
                             <div class="dropdown">
@@ -50,11 +51,11 @@
                 </div>
                 <div class="form-group">
                     <lable for="description">问题补充 (必填，请参照右侧提示):</lable>
-                    <textarea name="description"   id="description" class="form-control" rows="10" th:text="${description}"></textarea>
+                    <textarea name="description"   id="description" class="form-control" rows="10" th:text="${question !=null ?question.description:''}"></textarea>
                 </div>
                 <div class="form-group">
                     <lable for="tag">添加标签:</lable>
-                    <input name="tag" id="tag" type="text" class="form-control" placeholder="请输入标签，以逗号隔开" th:value="${tag}"> </input>
+                    <input name="tag" id="tag" type="text" class="form-control" placeholder="请输入标签，以逗号隔开" th:value="${question !=null ? question.tag:''}"> </input>
                 </div>
                 <div th:if="${error != null }" class="alert alert-danger" th:text="${error}"></div>
 

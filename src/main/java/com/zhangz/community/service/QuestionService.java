@@ -115,4 +115,20 @@ public class QuestionService {
         questionDTO.setUser(user);
         return questionDTO;
     }
+
+    public void insertOrUpdate(Question question) {
+        Question q =questionMapper.getById(question.getId());
+        if (q == null ){
+            //新增
+            questionMapper.create(question);
+        }else {
+            //更新
+            q.setGmtModified(question.getGmtModified());
+            q.setDescription(question.getDescription());
+            q.setTag(question.getTag());
+            q.setTitle(question.getTitle());
+            questionMapper.update(q);
+        }
+
+    }
 }
