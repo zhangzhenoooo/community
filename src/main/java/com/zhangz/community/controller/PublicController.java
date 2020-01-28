@@ -41,7 +41,7 @@ public class PublicController {
             @RequestParam(value = "title",required = false,defaultValue = "") String title,
             @RequestParam(value = "description",required = false,defaultValue = "") String description,
             @RequestParam(value = "tag",required = false,defaultValue = "") String tag,
-            @RequestParam(value = "id",required = false,defaultValue = "") Integer id,
+            @RequestParam(value = "id",required = false,defaultValue = "") Long id,
             HttpServletRequest request,
             Model model
     ) {
@@ -87,11 +87,11 @@ public class PublicController {
     @GetMapping("/publish/{id}")
     public String edit(
             Model model,
-            @PathVariable(name = "id") Integer id,
+            @PathVariable(name = "id") Long id,
             HttpServletRequest request,
             HttpServletResponse response
     ){
-        Question question = questionMapper.getById(id);
+        Question question = questionMapper.selectByPrimaryKey(id);
         model.addAttribute("question",question);
         return "publish";
     }

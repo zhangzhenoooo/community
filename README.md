@@ -9,7 +9,7 @@
 [fastjson](https://mvnrepository.com/artifact/com.alibaba/fastjson)
 [mybatis-spring-boot](http://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/)
 [spring-docs-database](https://docs.spring.io/spring-boot/docs/2.0.0.RC1/reference/htmlsingle/#howto-initialize-a-spring-batch-database)
-
+[mybatis generator](http://mybatis.org/generator/running/running.html)
 ##工具
 
 ##參考
@@ -42,4 +42,10 @@
 [One Tab](https://chrome.google.com/webstore/detail/chphlpgkkbolifaimnlloiipkdnihall)    
 [Live Reload](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei/related)  
 [Postman](https://chrome.google.com/webstore/detail/coohjcphdfgbiolnekdpbcijmhambjff)
+
+
+``````
+mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
+``````
+
 
