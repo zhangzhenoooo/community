@@ -18,13 +18,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class IndexController {
-    //    @GetMapping("/")
-//    public  String hello(@RequestParam(name = "name",required=false, defaultValue="") String name, Model model){
-//        model.addAttribute("name",name);
-//        return "index";
-//    }
-    @Autowired
-    private UserMapper userMapper;
+
     @Autowired
     private QuestionService questionService;
 
@@ -36,7 +30,6 @@ public class IndexController {
 
 
         PaginationDTo pagination = questionService.list(page, size);
-     //   System.out.println("test =  " + pagination.getTotalPage());
         model.addAttribute("pagination",pagination);
         return "index";
     }

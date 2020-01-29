@@ -7,4 +7,5 @@ package com.zhangz.community.exception;
  */
 public interface ICustomizeErrorCode {
     String getMessage();
+    Integer getCode();
 }
