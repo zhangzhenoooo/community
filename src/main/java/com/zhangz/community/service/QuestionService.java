@@ -4,11 +4,10 @@ import com.zhangz.community.dto.PaginationDTo;
 import com.zhangz.community.dto.QuestionDTO;
 import com.zhangz.community.exception.CustomizeErrorCode;
 import com.zhangz.community.exception.CustomizeException;
+import com.zhangz.community.mapper.FavoriteMapper;
 import com.zhangz.community.mapper.QuestionMapper;
 import com.zhangz.community.mapper.UserMapper;
-import com.zhangz.community.model.Question;
-import com.zhangz.community.model.QuestionExample;
-import com.zhangz.community.model.User;
+import com.zhangz.community.model.*;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +27,8 @@ public class QuestionService {
     private QuestionMapper questionMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private FavoriteMapper favoriteMapper;
 
 
     public PaginationDTo list(Integer page, Integer size) {
@@ -125,6 +126,15 @@ public class QuestionService {
         BeanUtils.copyProperties(question,questionDTO);
         User user= userMapper.selectByPrimaryKey(question.getCreator());
         questionDTO.setUser(user);
+
+        FavoriteExample favoriteExample = new FavoriteExample();
+        favoriteExample.createCriteria()
+                .andQuestionIdEqualTo(id)
+                .andCreatorEqualTo(user.getId());
+        List<Favorite> favorites = favoriteMapper.selectByExample(favoriteExample);
+        if (favorites.size() > 0){
+            questionDTO.setFavorite(favorites.get(0));
+        }
         return questionDTO;
     }
 

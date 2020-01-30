@@ -1,5 +1,6 @@
 package com.zhangz.community.dto;
 
+import com.zhangz.community.model.Favorite;
 import com.zhangz.community.model.User;
 import lombok.Data;
 
@@ -21,4 +22,5 @@ public class QuestionDTO {
     private Integer likeCount;
     private String tag;
     private User user;
+    private Favorite favorite;
 }

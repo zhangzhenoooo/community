@@ -1,8 +1,12 @@
 package com.zhangz.community.controller;
 
+import com.zhangz.community.dto.CommentDTO;
 import com.zhangz.community.dto.PaginationDTo;
 import com.zhangz.community.dto.QuestionDTO;
+import com.zhangz.community.enums.CommentTypeEnum;
+import com.zhangz.community.mapper.CommentMapper;
 import com.zhangz.community.mapper.QuestionMapper;
+import com.zhangz.community.service.CommentService;
 import com.zhangz.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +26,8 @@ import java.util.List;
 public class QuestionController {
     @Autowired
     private QuestionService questionService;
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("/question/{id}")
     public String question(
@@ -38,7 +44,9 @@ public class QuestionController {
 
         QuestionDTO questionDTO = questionService.getById(questionId);
         questionService.updateViewCount(questionId);
+        List<CommentDTO> commentDTO = commentService.listByTargetId(questionId, CommentTypeEnum.QUESTION);
         model.addAttribute("question",questionDTO);
+        model.addAttribute("comments",commentDTO);
 
        return "question" ;
     }
