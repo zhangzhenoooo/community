@@ -38,6 +38,7 @@ public class CommentService {
 @Transactional
 //事务回滚注解
     public void insert(Comment comment) {
+
         if (comment.getParentId() == null || comment.getParentId() == 0){
             throw  new CustomizeException(CustomizeErrorCode.TARGET_PARAM_NOT_FOUND);
         }
@@ -55,7 +56,7 @@ public class CommentService {
             Comment parentComment = new Comment();
             parentComment.setId(comment.getParentId());
             parentComment.setCommentCount(1);
-            commentExtMapper.incCommentCount(comment);
+            commentExtMapper.incCommentCount(parentComment);
 
         }else {
             //回复问题

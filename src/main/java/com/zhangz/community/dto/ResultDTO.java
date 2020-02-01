@@ -4,15 +4,18 @@ import com.zhangz.community.exception.CustomizeErrorCode;
 import com.zhangz.community.exception.CustomizeException;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author zhangz
  * @version 1.0
  * @date 2020/1/28 14:45
  */
 @Data
-public class ResultDTO {
+public class ResultDTO<T> {
     private Integer code;
     private String message;
+    private T data;
 
 
     public static ResultDTO errorOf(Integer code,String message){
@@ -35,6 +38,13 @@ public class ResultDTO {
         ResultDTO resultDTO = new ResultDTO();
         resultDTO.setCode(200);
         resultDTO.setMessage("success");
+        return resultDTO;
+    }
+
+    public static<T> ResultDTO succeed(T t){
+        ResultDTO resultDTO = new ResultDTO();
+        resultDTO.setCode(200);
+        resultDTO.setData(t);
         return resultDTO;
     }
 

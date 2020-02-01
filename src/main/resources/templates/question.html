@@ -10,6 +10,7 @@
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script src="/js/bootstrap.min.js" type="application/javascript"></script>
     <script src="/js/community.js"></script>
+    <script src="/js/moment.js"></script>
 
 
 </head>
@@ -22,8 +23,8 @@
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 ">
             <h3><span th:text="${question.title}"></span></h3>
             <span class="text-desc ">
-                   作者： <span th:text="${question.user.name}"> </span>
-                 发布时间： <span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span>
+                   作者： <span th:text="${question.user.name}"> </span>|
+                 发布时间： <span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span>|
                  阅读次数： <span th:text="${question.viewCount}"></span>
             </span >
             <!--分割线-->

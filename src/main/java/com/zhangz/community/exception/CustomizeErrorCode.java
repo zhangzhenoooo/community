@@ -16,6 +16,8 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode {
     COMMENT_NOT_FOUND(2006,"此评论不存在，请换个问题试试！"),
     COMMENT_INSERT_FAILED(2007,"评论失败"),
     FAVORITE_NOT_FOUND(2008,"还没有收藏哦，可能是系统偷懒了，熟悉一下吧！"),
+    COMMENT_IS_NULL(2009,"评论为空！"),
+    COMMENT_CONTENT_IS_NULL(2010,"评论内容为空"),
     ;
 
     private Integer code;

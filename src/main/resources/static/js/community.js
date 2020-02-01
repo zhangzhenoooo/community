@@ -50,6 +50,7 @@ function comment2target(targetId, type, content) {
     });
 }
 
+
 function comment(e) {
     var commentId = e.getAttribute("data-id");
     var content = $("#input-" + commentId).val();
@@ -137,7 +138,8 @@ function selectTag(e) {
         }
     }
 }
-// 添加收藏
+
+// 收藏favorite
 function favorite() {
     var questionId = $("#question_id").val();
     var favoriteId = $("#favorite_id").val();
@@ -164,10 +166,10 @@ function favorite() {
                              localStorage 属性是只读的。*/
                     }
                 }else if (response.code == 2008){
-                   var isAccepted = confirm(response.message);
-                   if (isAccepted){
-                       window.location.reload();
-                   }
+                    var isAccepted = confirm(response.message);
+                    if (isAccepted){
+                        window.location.reload();
+                    }
                 }  else  {
                     alert(response.message);
                 }

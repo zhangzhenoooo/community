@@ -65,7 +65,9 @@
                             th:text="${question.viewCount}"></span> 次浏览 • <span
                             th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span></span>
                 </div>
+                <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
             </div>
+            <!--分页-->
             <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <li th:if="${pagination.showPrevious}">

@@ -30,7 +30,7 @@ public class FavoriteController {
 
     @ResponseBody
     @RequestMapping(value = "/favorite",method = RequestMethod.POST)
-    private  Object  addFavorite(@RequestBody Favorite favorite,
+    private  Object favorite(@RequestBody Favorite favorite,
                                  HttpServletRequest request){
 
         User user = (User) request.getSession().getAttribute("user");

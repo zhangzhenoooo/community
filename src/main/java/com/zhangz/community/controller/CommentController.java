@@ -2,6 +2,7 @@ package com.zhangz.community.controller;
 
 import com.zhangz.community.dto.CommentDTO;
 import com.zhangz.community.dto.ResultDTO;
+import com.zhangz.community.enums.CommentTypeEnum;
 import com.zhangz.community.exception.CustomizeErrorCode;
 import com.zhangz.community.mapper.CommentMapper;
 import com.zhangz.community.model.Comment;
@@ -36,6 +37,12 @@ public class CommentController {
         if (user == null){
             return ResultDTO.errorOf(CustomizeErrorCode.NOT_LOGIN);
         }
+        if (commentDTO == null){
+            return  ResultDTO.errorOf(CustomizeErrorCode.COMMENT_IS_NULL);
+        }
+        if (commentDTO.getContent() == null || "".equals(commentDTO.getContent())){
+            return  ResultDTO.errorOf(CustomizeErrorCode.COMMENT_CONTENT_IS_NULL);
+        }
         Comment comment = new Comment();
         comment.setParentId(commentDTO.getParentId());
         comment.setContent(commentDTO.getContent());
@@ -47,7 +54,17 @@ public class CommentController {
         comment.setLikeCount(0L);
         commentService.insert(comment);
         return  ResultDTO.succeed();
-
     }
 
+
+//    二级评论
+    @ResponseBody
+    @RequestMapping(value = "/comment/{id}",method = RequestMethod.GET)
+    public  ResultDTO  comments(@PathVariable (value = "id") Long id){
+
+        List<CommentDTO> commentDTOS = commentService.listByTargetId(id, CommentTypeEnum.COMMENT);
+        return  ResultDTO.succeed(commentDTOS);
+
+    }
 }
+
