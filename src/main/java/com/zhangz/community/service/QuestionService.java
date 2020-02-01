@@ -5,16 +5,20 @@ import com.zhangz.community.dto.QuestionDTO;
 import com.zhangz.community.exception.CustomizeErrorCode;
 import com.zhangz.community.exception.CustomizeException;
 import com.zhangz.community.mapper.FavoriteMapper;
+import com.zhangz.community.mapper.QuestionExtMapper;
 import com.zhangz.community.mapper.QuestionMapper;
 import com.zhangz.community.mapper.UserMapper;
 import com.zhangz.community.model.*;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author zhangz
@@ -29,6 +33,8 @@ public class QuestionService {
     private UserMapper userMapper;
     @Autowired
     private FavoriteMapper favoriteMapper;
+    @Autowired
+    private QuestionExtMapper questionExtMapper;
 
 
     public PaginationDTo list(Integer page, Integer size) {
@@ -176,5 +182,26 @@ public class QuestionService {
         example.createCriteria()
                 .andIdEqualTo(id);
         questionMapper.updateByExampleSelective(updateQuestion,example);
+    }
+
+    public List<QuestionDTO> selectRelates(QuestionDTO questionDTO) {
+
+        if (StringUtils.isBlank(questionDTO.getTag())) {
+            return new ArrayList<>();
+        }
+        String[] tags = StringUtils.split(questionDTO.getTag(), ",");
+        String regexpTag = Arrays.stream(tags).collect(Collectors.joining("|"));
+        Question question = new Question();
+        question.setId(questionDTO.getId());
+        question.setTag(regexpTag);
+
+        //将Question类型的list转换成QuestionDTO   ： java8 新特性
+        List<Question> questions = questionExtMapper.selectRelated(question);
+        List<QuestionDTO> QuestionDTOS= questions.stream().map(q -> {
+            QuestionDTO questionDTO1 = new QuestionDTO();
+            BeanUtils.copyProperties(q,questionDTO1);
+            return questionDTO1;
+        }).collect(Collectors.toList());
+        return QuestionDTOS;
     }
 }
