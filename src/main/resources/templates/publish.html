@@ -31,21 +31,8 @@
                 <div class="form-group">
                     <label for="title">问题标题（简单扼要）：</label>
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                             <input type="text" class="form-control" name="title" id="title" placeholder="请输入标题" th:value="${question != null ? question.getTitle():''}">
-                        </div>
-                        <div class="col-md-2">
-                            <div class="dropdown">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    选择类型
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <li><a href="#">默认类型</a></li>
-                                    <li><a href="#">技术类</a></li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -53,20 +40,47 @@
                     <lable for="description">问题补充 (必填，请参照右侧提示):</lable>
                     <textarea name="description"   id="description" class="form-control" rows="10" th:text="${question !=null ?question.description:''}"></textarea>
                 </div>
+                <!--标签-->
                 <div class="form-group">
-                    <lable for="tag">添加标签:</lable>
-                    <input name="tag" id="tag" type="text" class="form-control" placeholder="请输入标签，以逗号隔开" th:value="${question !=null ? question.tag:''}"> </input>
+                    <label for="tag">添加标签:</label>
+                    <input type="text" class="form-control" th:value="${question != null ? question.tag : ''}" id="tag" name="tag"
+                           autocomplete="off"
+                           placeholder="输入标签，以，号分隔"
+                           onclick="showSelectTag()">
+                    <div id="select-tag" class="publish-tag-tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" th:each="selectCategory,selectCategoryStat: ${tags}"
+                                th:class="${selectCategoryStat.first ? 'active':''}">
+                                <a th:href="${'#'+selectCategory.category}" aria-controls="home" role="tab"
+                                   data-toggle="tab" th:text="${selectCategory.category}"></a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" th:id="${selectCategory.category}"
+                                 th:each="selectCategory: ${tags}"
+                                 th:class="${selectCategoryStat.first ? 'active tab-pane':'tab-pane'}">
+                                <span>
+                                    <span th:each="selectTag: ${selectCategory.tags}">
+                                    <span class="community-tag" onclick="selectTag(this)"
+                                          th:data-tag="${selectTag}"
+                                          th:text="${' '+selectTag}">
+                                    </span>
+                                </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <!--错误提示-->
                 <div th:if="${error != null }" class="alert alert-danger" th:text="${error}"></div>
-
-                <button type="submit" class="btn btn-success ">发起</button>
-
+                <!--发起/保存 按钮-->
+                <button type="submit" class="btn btn-success" th:text="${question != null ? '保存修改':'发起问题'}"></button>
             </form>
             <h2><span aria-hidden="true"></span></h2>
 
         </div>
         <div class="col-lg3 col-md-3 col-sm-12 col-xs-12" aria-hidden="true">
-            <!--<h3>问题发起指南</h3>-->
             <label><h3>问题发起指南</h3></label>
             <hr>
             <span>
