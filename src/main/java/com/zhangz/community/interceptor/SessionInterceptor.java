@@ -3,6 +3,7 @@ package com.zhangz.community.interceptor;
 import com.zhangz.community.mapper.UserMapper;
 import com.zhangz.community.model.User;
 import com.zhangz.community.model.UserExample;
+import com.zhangz.community.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -25,6 +26,8 @@ public class SessionInterceptor implements HandlerInterceptor {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    NotificationService notificationService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -41,8 +44,8 @@ public class SessionInterceptor implements HandlerInterceptor {
                     if (users.size() != 0) {
                         HttpSession session = request.getSession();
                         session.setAttribute("user", users.get(0));
-//                        Long unreadCount = notificationService.unreadCount(users.get(0).getId());
-//                        session.setAttribute("unreadCount", unreadCount);
+                        Long unreadCount = notificationService.unReadCount(users.get(0).getId());
+                        session.setAttribute("unReadCount", unreadCount);
                     }
                     break;
                 }

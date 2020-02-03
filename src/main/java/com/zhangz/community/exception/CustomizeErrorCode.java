@@ -18,7 +18,11 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode {
     FAVORITE_NOT_FOUND(2008,"还没有收藏哦，可能是系统偷懒了，熟悉一下吧！"),
     COMMENT_IS_NULL(2009,"评论为空！"),
     COMMENT_CONTENT_IS_NULL(2010,"评论内容为空"),
+    USER_NOT_EXIST(2011,"用户不存在"),
+    READ_NOTIFICATION_FAIL(2012,"所读取的不是当前登录用户的信息！"),
+    NOTIFY_NOT_FIND(2001,"此消息不存在，请换个试试！"),
     ;
+
 
     private Integer code;
     private  String message;

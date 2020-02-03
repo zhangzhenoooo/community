@@ -3,6 +3,7 @@ package com.zhangz.community.controller;
 import com.zhangz.community.dto.PaginationDTo;
 import com.zhangz.community.mapper.UserMapper;
 import com.zhangz.community.model.User;
+import com.zhangz.community.service.NotificationService;
 import com.zhangz.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class ProfileController {
     @Autowired
-    private UserMapper userMapper;
+    private NotificationService notificationService;
+
     @Autowired
     private QuestionService questionService;
 
@@ -40,13 +42,16 @@ public class ProfileController {
         if ("questions".equals(action)){
             model.addAttribute("section","questions");
             model.addAttribute("sectionName","我的提问");
+            PaginationDTo paginationDTo =  questionService.list(user.getId(),page,size);
+            model.addAttribute("pagination",paginationDTo);
         }
         if ("replies".equals(action)){
             model.addAttribute("section","replies");
             model.addAttribute("sectionName","最新回复");
+            PaginationDTo paginationDTo =  notificationService.list(user.getId(),page,size);
+            model.addAttribute("pagination",paginationDTo);
         }
-        PaginationDTo paginationDTo =  questionService.list(user.getId(),page,size);
-        model.addAttribute("pagination",paginationDTo);
+
         return "profile";
     }
 }

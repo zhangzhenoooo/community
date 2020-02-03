@@ -1,7 +1,9 @@
 package com.zhangz.community.controller;
 
 import com.zhangz.community.dto.PaginationDTo;
+import com.zhangz.community.dto.QuestionDTO;
 import com.zhangz.community.mapper.UserMapper;
+import com.zhangz.community.service.NotificationService;
 import com.zhangz.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +29,6 @@ public class IndexController {
                         Model model,
                         @RequestParam(name = "page",defaultValue = "1") Integer page,
                         @RequestParam(name = "size",defaultValue = "3") Integer size) {
-
 
         PaginationDTo pagination = questionService.list(page, size);
         model.addAttribute("pagination",pagination);

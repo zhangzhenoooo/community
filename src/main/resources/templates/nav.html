@@ -55,6 +55,7 @@
                         <span th:text="${session.user.getName()}"></span>
                     </a>
                     <ul class="dropdown-menu">
+                        <li><a href="/profile/replies">消息&nbsp;&nbsp;<span class="badge" th:text="${session.unReadCount}"> </span></a></li>
                         <li><a href="/profile/questions">我的问题</a></li>
                         <li><a href="/logout">退出登录</a></li>
                     </ul>

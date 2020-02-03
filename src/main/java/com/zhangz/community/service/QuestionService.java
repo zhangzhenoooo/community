@@ -69,7 +69,7 @@ public class QuestionService {
             questionDTOList.add(questionDTO);
         }
 
-        paginationDTo.setQuestionDTOList(questionDTOList);
+        paginationDTo.setData(questionDTOList);
         return  paginationDTo;
 
     }
@@ -119,7 +119,7 @@ public class QuestionService {
             questionDTOList.add(questionDTO);
         }
 
-        paginationDTo.setQuestionDTOList(questionDTOList);
+        paginationDTo.setData(questionDTOList);
         return  paginationDTo;
 
     }
