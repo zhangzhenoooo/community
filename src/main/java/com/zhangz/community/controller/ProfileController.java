@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 public class ProfileController {
     @Autowired
     private NotificationService notificationService;
-
     @Autowired
     private QuestionService questionService;
 

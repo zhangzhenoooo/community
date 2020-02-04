@@ -12,7 +12,6 @@ function post() {
 }
 
 function comment2target(targetId, type, content) {
-    // 校验回复类容不能为空
     if (!content) {
         alert("不能回复空内容~~~");
         return;
@@ -34,12 +33,8 @@ function comment2target(targetId, type, content) {
                 if (response.code == 2003) {
                     var isAccepted = confirm(response.message);
                     if (isAccepted) {
-                        // window.open("https://github.com/login/oauth/authorize?client_id=4dace63cd03686b4f799&redirect_uri=" + document.location.origin + "/callback&scope=user&state=1");
-                        window.open("https://github.com/login/oauth/authorize?client_id=4dace63cd03686b4f799&redirect_uri=http://localhost:8888/callback&scope=user&state=1")
+                        window.open("https://github.com/login/oauth/authorize?client_id=2859958f9f059979ed3a&redirect_uri=" + document.location.origin + "/callback&scope=user&state=1");
                         window.localStorage.setItem("closable", true);
-                        /*   localStorage 和 sessionStorage 属性允许在浏览器中存储 key/value 对的数据。
-                             localStorage 用于长久保存整个网站的数据，保存的数据没有过期时间，直到手动去删除。
-                             localStorage 属性是只读的。*/
                     }
                 } else {
                     alert(response.message);
@@ -49,7 +44,6 @@ function comment2target(targetId, type, content) {
         dataType: "json"
     });
 }
-
 
 function comment(e) {
     var commentId = e.getAttribute("data-id");
@@ -139,6 +133,7 @@ function selectTag(e) {
     }
 }
 
+
 // 收藏favorite
 function favorite() {
     var questionId = $("#question_id").val();
@@ -158,9 +153,9 @@ function favorite() {
                 if (response.code == 2003) {
                     var isAccepted = confirm(response.message);
                     if (isAccepted) {
-                        // window.open("https://github.com/login/oauth/authorize?client_id=4dace63cd03686b4f799&redirect_uri=" + document.location.origin + "/callback&scope=user&state=1");
-                        window.open("https://github.com/login/oauth/authorize?client_id=4dace63cd03686b4f799&redirect_uri=http://localhost:8888/callback&scope=user&state=1")
-                        window.localStorage.setItem("closable", true);
+                        window.open("https://github.com/login/oauth/authorize?client_id=4dace63cd03686b4f799&redirect_uri=" + document.location.origin + "/callback&scope=user&state=1");
+                        // window.open("https://github.com/login/oauth/authorize?client_id=4dace63cd03686b4f799&redirect_uri=http://localhost:8888/callback&scope=user&state=1")
+                        window.localStorage.setItem("closable",true);
                         /*   localStorage 和 sessionStorage 属性允许在浏览器中存储 key/value 对的数据。
                              localStorage 用于长久保存整个网站的数据，保存的数据没有过期时间，直到手动去删除。
                              localStorage 属性是只读的。*/
