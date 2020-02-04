@@ -8,9 +8,12 @@ import com.zhangz.community.mapper.CommentMapper;
 import com.zhangz.community.model.Comment;
 import com.zhangz.community.model.User;
 import com.zhangz.community.service.CommentService;
+import org.apache.commons.logging.Log;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import sun.plugin2.jvm.RemoteJVMLauncher;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -54,6 +57,7 @@ public class CommentController {
         comment.setLikeCount(0L);
         commentService.insert(comment);
         return  ResultDTO.succeed();
+
     }
 
 

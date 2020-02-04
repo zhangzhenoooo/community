@@ -11,18 +11,15 @@
     <script src="/js/bootstrap.min.js" type="application/javascript"></script>
     <script src="/js/community.js" type="application/javascript"></script>
     <link rel="stylesheet" href="/css/community.css">
-
-
 </head>
 <script type="application/javascript">
     window.onload = function () {
         var closable = window.localStorage.getItem("closable");
-        if (closable == true){
+        if (closable == "true") {
             window.close();
             window.localStorage.removeItem("closable");
         }
     }
-
 </script>
 <body >
 <!--顶部-->
@@ -100,9 +97,8 @@
         </div>
 
     </div>
-
-
 </div>
+<div th:insert="~{ footer :: foot}"></div>
 
 </body>
 </html>
